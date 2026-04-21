@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <style>
+    @page { size: A4; margin: 2.5cm; }
+    body { font-family: 'Helvetica', 'Arial', sans-serif; color: #1e293b; line-height: 1.7; font-size: 12pt; }
+    .header { text-align: center; border-bottom: 3px solid #0d9488; padding-bottom: 20px; margin-bottom: 30px; }
+    .header h1 { font-size: 14pt; color: #0d9488; margin: 0; letter-spacing: 2px; text-transform: uppercase; }
+    .header p { margin: 5px 0 0; color: #64748b; font-size: 10pt; }
+    .logo-text { font-size: 22pt; font-weight: bold; color: #0d9488; margin-bottom: 5px; }
+    .title { text-align: center; font-size: 16pt; font-weight: bold; margin: 40px 0 30px; color: #0f172a; text-transform: uppercase; letter-spacing: 2px; }
+    .info-box { background: #f1f5f9; border-radius: 8px; padding: 15px 20px; margin: 20px 0; }
+    .info-box table { width: 100%; border-collapse: collapse; }
+    .info-box td { padding: 6px 10px; font-size: 11pt; }
+    .info-box td:first-child { font-weight: bold; color: #475569; width: 40%; }
+    .body-text { margin: 20px 0; text-align: justify; }
+    .footer { margin-top: 60px; }
+    .footer .date { color: #64748b; font-size: 10pt; margin-bottom: 5px; }
+    .sig-grid { display: flex; justify-content: space-between; margin-top: 20px; }
+    .sig-block { text-align: center; width: 45%; }
+    .sig-block p { margin: 5px 0; font-size: 10pt; color: #475569; }
+    .sig-block .title-sig { font-weight: bold; color: #0f172a; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-text">INPT</div>
+    <h1>Institut National des Postes et Télécommunications</h1>
+    <p>Avenue Allal Al Fassi, Madinat Al Irfane, Rabat</p>
+  </div>
+
+  <div class="title">Demande de Congé</div>
+
+  <div class="info-box">
+    <table>
+      <tr><td>Nom complet</td><td>{{ full_name }}</td></tr>
+      <tr><td>N° étudiant</td><td>{{ student_id }}</td></tr>
+      <tr><td>Filière</td><td>{{ filiere }}</td></tr>
+    </table>
+  </div>
+
+  <div class="body-text">
+    <p>Je soussigné(e), <strong>{{ full_name }}</strong>, étudiant(e) en <strong>{{ filiere }}</strong>
+    à l'INPT, sollicite par la présente un congé pour la période suivante :</p>
+  </div>
+
+  <div class="info-box">
+    <table>
+      <tr><td>Date de début</td><td>{{ start_date }}</td></tr>
+      <tr><td>Date de fin</td><td>{{ end_date }}</td></tr>
+      <tr><td>Motif</td><td>{{ reason }}</td></tr>
+    </table>
+  </div>
+
+  <div class="body-text">
+    <p>Je m'engage à rattraper tous les cours et travaux manqués durant cette période.</p>
+    <p>Je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations respectueuses.</p>
+  </div>
+
+  <div class="footer">
+    <div class="date">Fait à Rabat, le {{ date }}</div>
+    <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+      <div style="text-align: center; width: 45%;">
+        <p style="font-weight: bold; color: #0f172a;">Signature de l'étudiant(e)</p>
+        <p style="color: #94a3b8; font-size: 10pt; margin-top: 40px;">________________</p>
+      </div>
+      <div style="text-align: center; width: 45%;">
+        <p style="font-weight: bold; color: #0f172a;">Visa de la direction</p>
+        <p style="color: #94a3b8; font-size: 10pt; margin-top: 40px;">________________</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

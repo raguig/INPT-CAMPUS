@@ -9,12 +9,13 @@ except ImportError:  # pragma: no cover
     ConfigDict = None
 
 
-class ORMBaseModel(BaseModel):
-    if ConfigDict is not None:
+if ConfigDict is not None:
+    class ORMBaseModel(BaseModel):
         model_config = ConfigDict(from_attributes=True)
-
-    class Config:
-        orm_mode = True
+else:  # pragma: no cover
+    class ORMBaseModel(BaseModel):
+        class Config:
+            orm_mode = True
 
 
 class RegisterRequest(BaseModel):

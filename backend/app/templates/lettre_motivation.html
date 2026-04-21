@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <style>
+    @page { size: A4; margin: 2.5cm 3cm; }
+    body { font-family: 'Helvetica', 'Arial', sans-serif; color: #1e293b; line-height: 1.8; font-size: 12pt; }
+    .sender { margin-bottom: 30px; }
+    .sender p { margin: 2px 0; font-size: 11pt; color: #475569; }
+    .sender .name { font-weight: bold; color: #0f172a; font-size: 12pt; }
+    .recipient { text-align: right; margin-bottom: 30px; }
+    .recipient p { margin: 2px 0; font-size: 11pt; color: #475569; }
+    .date-line { text-align: right; color: #64748b; font-size: 10pt; margin-bottom: 30px; }
+    .subject { font-weight: bold; margin-bottom: 20px; font-size: 12pt; }
+    .body-text { text-align: justify; }
+    .body-text p { margin: 12px 0; }
+    .signature { margin-top: 40px; }
+    .signature .name { font-weight: bold; margin-top: 50px; }
+  </style>
+</head>
+<body>
+  <div class="sender">
+    <p class="name">{{ full_name }}</p>
+    <p>Étudiant(e) en {{ filiere }} – {{ year }}ème année</p>
+    <p>INPT, Rabat</p>
+    <p>{{ email }}</p>
+  </div>
+
+  <div class="date-line">Rabat, le {{ date }}</div>
+
+  <div class="recipient">
+    <p><strong>{{ company_name }}</strong></p>
+    <p>Service des Ressources Humaines</p>
+  </div>
+
+  <div class="subject">
+    Objet : Candidature pour le poste « {{ internship_title }} »
+  </div>
+
+  <div class="body-text">
+    {{ content }}
+  </div>
+
+  <div class="signature">
+    <p>Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées.</p>
+    <p class="name">{{ full_name }}</p>
+  </div>
+</body>
+</html>

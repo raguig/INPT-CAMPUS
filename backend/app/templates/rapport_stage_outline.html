@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <style>
+    @page { size: A4; margin: 2.5cm; }
+    body { font-family: 'Helvetica', 'Arial', sans-serif; color: #1e293b; line-height: 1.8; font-size: 12pt; }
+    .header { text-align: center; border-bottom: 3px solid #0d9488; padding-bottom: 20px; margin-bottom: 30px; }
+    .header h1 { font-size: 14pt; color: #0d9488; margin: 0; letter-spacing: 2px; text-transform: uppercase; }
+    .header p { margin: 5px 0 0; color: #64748b; font-size: 10pt; }
+    .logo-text { font-size: 22pt; font-weight: bold; color: #0d9488; margin-bottom: 5px; }
+    .cover-title { text-align: center; margin: 60px 0 20px; }
+    .cover-title h2 { font-size: 22pt; color: #0f172a; margin: 0; }
+    .cover-title .subtitle { font-size: 14pt; color: #0d9488; margin-top: 10px; font-weight: bold; }
+    .meta { text-align: center; color: #64748b; font-size: 11pt; margin: 20px 0 50px; }
+    .meta p { margin: 4px 0; }
+    .chapter { margin: 25px 0; page-break-inside: avoid; }
+    .chapter h3 { font-size: 14pt; color: #0d9488; border-left: 4px solid #0d9488; padding-left: 12px; margin-bottom: 8px; }
+    .chapter p { font-size: 11pt; color: #475569; margin: 4px 0 4px 16px; }
+    .chapter ul { margin: 8px 0 8px 30px; font-size: 11pt; color: #475569; }
+    .chapter ul li { margin: 4px 0; }
+    hr { border: none; border-top: 1px solid #e2e8f0; margin: 30px 0; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-text">INPT</div>
+    <h1>Institut National des Postes et Télécommunications</h1>
+    <p>Avenue Allal Al Fassi, Madinat Al Irfane, Rabat</p>
+  </div>
+
+  <div class="cover-title">
+    <h2>Rapport de Stage</h2>
+    <div class="subtitle">Plan détaillé</div>
+  </div>
+
+  <div class="meta">
+    <p><strong>{{ full_name }}</strong> — {{ filiere }}, {{ year }}ème année</p>
+    <p>{{ company_name }}{% if internship_title %} — {{ internship_title }}{% endif %}</p>
+    <p>{{ date }}</p>
+  </div>
+
+  <hr>
+
+  <div class="body-text">
+    {{ content }}
+  </div>
+</body>
+</html>
