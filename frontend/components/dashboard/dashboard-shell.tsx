@@ -202,7 +202,7 @@ export function DashboardShell({ initialUser, token }: DashboardShellProps) {
                 <div className="rounded-[1.5rem] border border-gray-100 bg-white p-4">
                   <p className="text-gray-500">Année</p>
                   <p className="mt-2 text-base font-semibold text-black">
-                    {initialUser.year}ème année
+                    INE{initialUser.year}
                   </p>
                 </div>
               </div>

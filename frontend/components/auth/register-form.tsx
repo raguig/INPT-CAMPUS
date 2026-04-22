@@ -251,9 +251,9 @@ export function RegisterForm() {
               onChange={(event) => setField("year", event.target.value)}
             >
               <option value="">Choisir</option>
-              <option value="1">1ère année</option>
-              <option value="2">2ème année</option>
-              <option value="3">3ème année</option>
+              <option value="1">INE1</option>
+              <option value="2">INE2</option>
+              <option value="3">INE3</option>
             </Select>
             {errors.year ? (
               <p className="text-sm text-red-600">{errors.year}</p>
