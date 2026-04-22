@@ -49,6 +49,17 @@ export type ProfileUpdate = {
 
 export const FILIERES = ["ASEDS", "ICCN", "DATA", "SESNUM", "SMART", "AMOA", "CLOUD", "MASTER DATA IA"] as const;
 
+export const FILIERE_LABELS: Record<string, string> = {
+  "ASEDS": "ASEDS",
+  "ICCN": "ICCN",
+  "DATA": "DATA",
+  "SESNUM": "SESNUM",
+  "SMART": "SMART",
+  "AMOA": "AMOA",
+  "CLOUD": "CLOUD",
+  "MASTER DATA IA": "MASTER DATA AI",
+};
+
 export const REMOTE_OPTIONS = [
   { value: "all", label: "Tous" },
   { value: "presentiel", label: "Présentiel" },

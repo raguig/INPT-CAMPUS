@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MatchScore } from "@/components/internships/MatchScore";
 import type { InternshipOffer } from "@/lib/internships-types";
-import { REMOTE_LABELS } from "@/lib/internships-types";
+import { REMOTE_LABELS, FILIERE_LABELS } from "@/lib/internships-types";
 import { cn } from "@/lib/utils";
 
 type InternshipCardProps = {
@@ -73,7 +73,7 @@ export function InternshipCard({ offer, showMatch }: InternshipCardProps) {
         <div className="mt-3 flex flex-wrap gap-1.5">
           {offer.filieres.map((f) => (
             <span key={f} className="rounded-lg bg-primary/10 px-2 py-0.5 text-xs font-bold text-primary">
-              {f}
+              {FILIERE_LABELS[f] ?? f}
             </span>
           ))}
         </div>

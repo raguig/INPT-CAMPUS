@@ -60,14 +60,10 @@ export function InternshipsBoard({ internships, matches }: InternshipsBoardProps
         </header>
 
         <FilterBar
-          activeTab={activeTab}
           filiere={filiere}
-          duration={duration}
           remote={remote}
           search={search}
-          onTabChange={setActiveTab}
           onFiliereChange={setFiliere}
-          onDurationChange={setDuration}
           onRemoteChange={setRemote}
           onSearchChange={setSearch}
         />

@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
-import { FILIERES, REMOTE_OPTIONS } from "@/lib/internships-types";
+import { FILIERES, FILIERE_LABELS, REMOTE_OPTIONS } from "@/lib/internships-types";
 
 type FilterBarProps = {
   filiere: string;
@@ -24,11 +24,11 @@ export function FilterBar({
       <Select
         value={filiere}
         onChange={(e) => onFiliereChange(e.target.value)}
-        className="w-36"
+        className="w-[280px]"
       >
         <option value="all">Toutes filières</option>
         {FILIERES.map((f) => (
-          <option key={f} value={f}>{f}</option>
+          <option key={f} value={f}>{FILIERE_LABELS[f]}</option>
         ))}
       </Select>
 

@@ -9,6 +9,7 @@ import { InternshipCard } from "@/components/internships/InternshipCard";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { InternshipOffer } from "@/lib/internships-types";
+import { FILIERE_LABELS } from "@/lib/internships-types";
 
 type InternshipDetailViewProps = {
   internship: InternshipOffer;
@@ -66,6 +67,22 @@ export function InternshipDetailView({
             </CardHeader>
             <CardContent className="space-y-5">
               <p className="text-sm leading-7 text-slate-700">{internship.description}</p>
+
+              <div>
+                <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500">
+                  Filières ciblées
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {internship.filieres.map((f) => (
+                    <span
+                      key={f}
+                      className="rounded-lg bg-primary/10 px-3 py-1 text-sm font-bold text-primary"
+                    >
+                      {FILIERE_LABELS[f] ?? f}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
               <div>
                 <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500">
