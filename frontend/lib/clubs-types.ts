@@ -8,7 +8,8 @@ export type ClubCategory =
   | "art"
   | "science"
   | "social"
-  | "entrepreneuriat";
+  | "entrepreneuriat"
+  | "freelance";
 
 export const CLUB_CATEGORIES: { label: string; value: ClubCategory | "tous"; emoji: string }[] = [
   { label: "Tous", value: "tous", emoji: "🌐" },
@@ -18,6 +19,7 @@ export const CLUB_CATEGORIES: { label: string; value: ClubCategory | "tous"; emo
   { label: "Science", value: "science", emoji: "🔬" },
   { label: "Social", value: "social", emoji: "🤝" },
   { label: "Entrepreneuriat", value: "entrepreneuriat", emoji: "🚀" },
+  { label: "Freelance", value: "freelance", emoji: "💼" },
 ];
 
 export const CATEGORY_COLORS: Record<ClubCategory, string> = {
@@ -27,6 +29,7 @@ export const CATEGORY_COLORS: Record<ClubCategory, string> = {
   science: "bg-violet-100 text-violet-700",
   social: "bg-emerald-100 text-emerald-700",
   entrepreneuriat: "bg-orange-100 text-orange-700",
+  freelance: "bg-teal-100 text-teal-700",
 };
 
 /* ── Club ─────────────────────────────────── */
@@ -72,7 +75,7 @@ export type ClubMember = {
 };
 
 /* ── Events ──────────────────────────────── */
-export type EventType = "workshop" | "hackathon" | "conference" | "meetup" | "competition" | "autre";
+export type EventType = "workshop" | "hackathon" | "conference" | "meetup" | "competition" | "freelance" | "autre";
 
 export const EVENT_TYPE_LABELS: Record<EventType, string> = {
   workshop: "Workshop",
@@ -80,6 +83,7 @@ export const EVENT_TYPE_LABELS: Record<EventType, string> = {
   conference: "Conférence",
   meetup: "Meetup",
   competition: "Compétition",
+  freelance: "Freelance",
   autre: "Autre",
 };
 
@@ -89,6 +93,7 @@ export const EVENT_TYPE_COLORS: Record<EventType, string> = {
   conference: "bg-emerald-100 text-emerald-700",
   meetup: "bg-amber-100 text-amber-700",
   competition: "bg-red-100 text-red-700",
+  freelance: "bg-teal-100 text-teal-700",
   autre: "bg-slate-100 text-slate-700",
 };
 

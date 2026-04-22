@@ -276,6 +276,28 @@ export function useChat({ initialSessionId, onSessionResolved }: UseChatOptions)
     [persistSessions],
   );
 
+  const deleteSession = useCallback(
+    (targetSessionId: string) => {
+      setSessions((current) => {
+        const next = current.filter((item) => item.id !== targetSessionId);
+        persistSessions(next);
+        return next;
+      });
+
+      if (typeof window !== "undefined") {
+        window.localStorage.removeItem(getMessagesStorageKey(targetSessionId));
+      }
+
+      if (activeSessionId === targetSessionId) {
+        setSessionId(undefined);
+        setMessages([]);
+        setSessionTitle("Nouvelle conversation");
+        setIsLoading(false);
+      }
+    },
+    [activeSessionId, persistSessions],
+  );
+
   const startNewSession = useCallback(() => {
     setSessionId(undefined);
     setMessages([]);
@@ -507,6 +529,7 @@ export function useChat({ initialSessionId, onSessionResolved }: UseChatOptions)
     loadSession,
     messages,
     renameSession,
+    deleteSession,
     sendMessage,
     sessionTitle,
     sessions,

@@ -26,6 +26,7 @@ def load_env_file(path: Path = ENV_FILE) -> None:
 load_env_file()
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 os.environ["CHROMA_CACHE_DIR"] = str((DATA_DIR / ".chroma_cache").resolve())
+os.environ["ANONYMIZED_TELEMETRY"] = "False"
 
 
 @dataclass(frozen=True)

@@ -29,6 +29,7 @@ export function ChatInterface({ initialSessionId, initialUser, token }: ChatInte
     loadSession,
     messages,
     renameSession,
+    deleteSession,
     sendMessage,
     sessionTitle,
     sessions,
@@ -77,6 +78,14 @@ export function ChatInterface({ initialSessionId, initialUser, token }: ChatInte
           onOpenSession={(sessionId) => {
             void loadSession(sessionId);
             router.push(`/chat/${sessionId}`);
+          }}
+          onDeleteSession={(sessionId) => {
+            if (window.confirm("Voulez-vous vraiment supprimer cette conversation ?")) {
+              deleteSession(sessionId);
+              if (activeSessionId === sessionId) {
+                router.push("/chat");
+              }
+            }
           }}
           collections={collections}
           selectedCollections={currentCollections}

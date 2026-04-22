@@ -1,6 +1,6 @@
 "use client";
 
-import { Plus, Search } from "lucide-react";
+import { Plus, Search, Trash2 } from "lucide-react";
 
 import type { ChatCollectionOption, ChatSessionSummary } from "@/hooks/useChat";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ type SessionSidebarProps = {
   onSearchChange: (value: string) => void;
   onCreateSession: () => void;
   onOpenSession: (sessionId: string) => void;
+  onDeleteSession: (sessionId: string) => void;
   collections: ChatCollectionOption[];
   selectedCollections: string[];
   onToggleCollection: (collectionId: string) => void;
@@ -38,6 +39,7 @@ export function SessionSidebar({
   onSearchChange,
   onCreateSession,
   onOpenSession,
+  onDeleteSession,
   collections,
   selectedCollections,
   onToggleCollection,
@@ -64,19 +66,31 @@ export function SessionSidebar({
           const isActive = session.id === activeSessionId;
 
           return (
-            <button
+            <div
               key={session.id}
-              type="button"
-              className={`w-full rounded-2xl border px-3 py-2 text-left transition ${
+              className={`group flex w-full items-center rounded-2xl border transition ${
                 isActive
                   ? "border-teal-200 bg-teal-50"
                   : "border-transparent bg-white/80 hover:border-slate-200"
               }`}
-              onClick={() => onOpenSession(session.id)}
             >
-              <p className="truncate text-sm font-semibold text-slate-800">{session.title}</p>
-              <p className="mt-0.5 text-xs text-slate-500">{formatDate(session.updatedAt)}</p>
-            </button>
+              <button
+                type="button"
+                className="flex-1 px-3 py-2 text-left"
+                onClick={() => onOpenSession(session.id)}
+              >
+                <p className="truncate text-sm font-semibold text-slate-800">{session.title}</p>
+                <p className="mt-0.5 text-xs text-slate-500">{formatDate(session.updatedAt)}</p>
+              </button>
+              <button
+                type="button"
+                onClick={() => onDeleteSession(session.id)}
+                className="mr-2 hidden p-1.5 text-slate-400 hover:text-red-500 group-hover:block"
+                title="Supprimer la conversation"
+              >
+                <Trash2 className="h-4 w-4" />
+              </button>
+            </div>
           );
         })}
       </div>
