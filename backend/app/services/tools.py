@@ -26,8 +26,11 @@ def rag_search(query: str, collection_ids: Optional[list[str]] = None) -> str:
     """
     try:
         import chromadb
+        from app.core.config import DATA_DIR
 
-        client = chromadb.HttpClient(host="localhost", port=8000)
+        chroma_dir = DATA_DIR / "chroma"
+        chroma_dir.mkdir(parents=True, exist_ok=True)
+        client = chromadb.PersistentClient(path=str(chroma_dir.resolve()))
 
         all_results: list[str] = []
         target_collections = collection_ids or []
@@ -68,8 +71,11 @@ def get_schedule(filiere: str, year: int) -> str:
     """
     try:
         import chromadb
+        from app.core.config import DATA_DIR
 
-        client = chromadb.HttpClient(host="localhost", port=8000)
+        chroma_dir = DATA_DIR / "chroma"
+        chroma_dir.mkdir(parents=True, exist_ok=True)
+        client = chromadb.PersistentClient(path=str(chroma_dir.resolve()))
         try:
             collection = client.get_collection("academic")
         except Exception:
@@ -106,8 +112,11 @@ def get_internships(
     """
     try:
         import chromadb
+        from app.core.config import DATA_DIR
 
-        client = chromadb.HttpClient(host="localhost", port=8000)
+        chroma_dir = DATA_DIR / "chroma"
+        chroma_dir.mkdir(parents=True, exist_ok=True)
+        client = chromadb.PersistentClient(path=str(chroma_dir.resolve()))
         try:
             collection = client.get_collection("internships")
         except Exception:
@@ -223,8 +232,11 @@ def get_deadlines() -> str:
     """
     try:
         import chromadb
+        from app.core.config import DATA_DIR
 
-        client = chromadb.HttpClient(host="localhost", port=8000)
+        chroma_dir = DATA_DIR / "chroma"
+        chroma_dir.mkdir(parents=True, exist_ok=True)
+        client = chromadb.PersistentClient(path=str(chroma_dir.resolve()))
         try:
             collection = client.get_collection("academic")
         except Exception:

@@ -210,8 +210,11 @@ async def _ingest_file(fetched_file: FetchedFile, connector: Connector) -> None:
     """Push a file into ChromaDB through the ingestion pipeline."""
     try:
         import chromadb
+        from app.core.config import DATA_DIR
 
-        client = chromadb.HttpClient(host="localhost", port=8000)
+        chroma_dir = DATA_DIR / "chroma"
+        chroma_dir.mkdir(parents=True, exist_ok=True)
+        client = chromadb.PersistentClient(path=str(chroma_dir.resolve()))
 
         collection_name = _collection_for(connector.connector_type)
         collection = client.get_or_create_collection(collection_name)
