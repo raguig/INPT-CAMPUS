@@ -48,7 +48,7 @@ export function ForgotPasswordForm() {
   return (
     <Card>
       <CardHeader>
-        <div className="inline-flex w-fit rounded-full border border-sky-100 bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">
+        <div className="inline-flex w-fit rounded-full border border-[#042747]/15 bg-[#042747]/5 px-3 py-1 text-xs font-semibold text-[#042747]">
           Réinitialisation
         </div>
         <CardTitle>Mot de passe oublié</CardTitle>
@@ -96,11 +96,11 @@ export function ForgotPasswordForm() {
           </Button>
         </form>
 
-        <p className="text-center text-sm text-slate-500">
+        <p className="text-center text-sm text-gray-500">
           Retour à{" "}
           <Link
             href="/login"
-            className="font-semibold text-slate-900 transition hover:text-primary"
+            className="font-semibold text-[#042747] transition hover:text-black"
           >
             la connexion
           </Link>

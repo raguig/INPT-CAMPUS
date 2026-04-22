@@ -89,7 +89,7 @@ async def generate_doc(
       Fills Jinja2 with student data → renders HTML → converts to PDF.
 
     For AI templates (LETTRE_MOTIVATION, RAPPORT_STAGE_OUTLINE):
-      Builds prompt from student profile → calls OpenAI → merges into template → PDF.
+      Builds prompt from student profile → calls Mistral → merges into template → PDF.
     """
 
     # Validate template type

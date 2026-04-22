@@ -128,7 +128,7 @@ export function LoginForm({
   return (
     <Card>
       <CardHeader>
-        <div className="inline-flex w-fit rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+        <div className="inline-flex w-fit rounded-full border border-[#042747]/15 bg-[#042747]/5 px-3 py-1 text-xs font-semibold text-[#042747]">
           Portail étudiant
         </div>
         <CardTitle>Se connecter</CardTitle>
@@ -165,7 +165,7 @@ export function LoginForm({
               <Label htmlFor="password">Mot de passe</Label>
               <Link
                 href="/forgot-password"
-                className="text-sm font-medium text-primary transition hover:text-[#0c6760]"
+                className="text-sm font-medium text-[#042747] transition hover:text-black"
               >
                 Mot de passe oublié ?
               </Link>
@@ -200,11 +200,11 @@ export function LoginForm({
           </Button>
         </form>
 
-        <p className="text-center text-sm text-slate-500">
+        <p className="text-center text-sm text-gray-500">
           Nouveau sur Campus INPT ?{" "}
           <Link
             href="/register"
-            className="font-semibold text-slate-900 transition hover:text-primary"
+            className="font-semibold text-[#042747] transition hover:text-black"
           >
             Créer un compte
           </Link>

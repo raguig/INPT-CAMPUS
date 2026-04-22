@@ -145,7 +145,7 @@ export function RegisterForm() {
   return (
     <Card>
       <CardHeader>
-        <div className="inline-flex w-fit rounded-full border border-orange-100 bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-700">
+        <div className="inline-flex w-fit rounded-full border border-[#042747]/15 bg-[#042747]/5 px-3 py-1 text-xs font-semibold text-[#042747]">
           Inscription Campus INPT
         </div>
         <CardTitle>Créer un compte</CardTitle>
@@ -209,11 +209,14 @@ export function RegisterForm() {
                 onChange={(event) => setField("filiere", event.target.value)}
               >
                 <option value="">Choisir</option>
-                <option value="RST">RST</option>
-                <option value="SSI">SSI</option>
-                <option value="GL">GL</option>
-                <option value="INSEA">INSEA</option>
-                <option value="TR">TR</option>
+                <option value="ASEDS">ASEDS</option>
+                <option value="ICCN">ICCN</option>
+                <option value="DATA">DATA</option>
+                <option value="SESNUM">SESNUM</option>
+                <option value="SMART">SMART</option>
+                <option value="AMOA">AMOA</option>
+                <option value="CLOUD">CLOUD</option>
+                <option value="MASTER DATA IA">MASTER DATA IA</option>
               </Select>
               {errors.filiere ? (
                 <p className="text-sm text-red-600">{errors.filiere}</p>
@@ -307,11 +310,11 @@ export function RegisterForm() {
           </Button>
         </form>
 
-        <p className="text-center text-sm text-slate-500">
+        <p className="text-center text-sm text-gray-500">
           Vous avez déjà un compte ?{" "}
           <Link
             href="/login"
-            className="font-semibold text-slate-900 transition hover:text-primary"
+            className="font-semibold text-[#042747] transition hover:text-black"
           >
             Se connecter
           </Link>

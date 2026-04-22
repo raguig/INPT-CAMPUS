@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f7fb;
-  --foreground: #132238;
-  --card: rgba(255, 255, 255, 0.84);
-  --card-foreground: #102033;
-  --muted: #64748b;
-  --border: rgba(15, 23, 42, 0.11);
-  --primary: #0f766e;
-  --primary-foreground: #f8fffe;
-  --secondary: #fff7ed;
-  --secondary-foreground: #9a3412;
-  --ring: rgba(15, 118, 110, 0.28);
+  --background: #f8f9fb;
+  --foreground: #0a0a0a;
+  --card: rgba(255, 255, 255, 0.92);
+  --card-foreground: #0a0a0a;
+  --muted: #6b7280;
+  --border: rgba(4, 39, 71, 0.12);
+  --primary: #042747;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #042747;
+  --ring: rgba(4, 39, 71, 0.22);
   --danger: #dc2626;
-  --font-sans: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-  --font-display: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-  --font-mono: Consolas, "Lucida Console", monospace;
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-display: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, "Lucida Console", monospace;
 }
 
 @theme inline {
@@ -46,10 +46,7 @@ body {
 }
 
 body {
-  background:
-    radial-gradient(circle at top left, rgba(45, 212, 191, 0.24), transparent 30%),
-    radial-gradient(circle at 82% 12%, rgba(251, 146, 60, 0.22), transparent 28%),
-    linear-gradient(155deg, #f4f7fb 0%, #eef8f5 48%, #fff7ed 100%);
+  background: #f8f9fb;
   color: var(--foreground);
   font-family: var(--font-sans);
 }
@@ -60,12 +57,12 @@ a {
 }
 
 ::selection {
-  background: rgba(15, 118, 110, 0.18);
+  background: rgba(4, 39, 71, 0.14);
 }
 
 .auth-grid {
   background-image:
-    linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+    linear-gradient(rgba(4, 39, 71, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(4, 39, 71, 0.04) 1px, transparent 1px);
   background-size: 28px 28px;
 }

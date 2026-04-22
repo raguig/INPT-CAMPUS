@@ -3,7 +3,7 @@
 Provides:
   - Global platform settings (admin-only write, encrypted API keys)
   - Per-user preferences (language, theme, notifications)
-  - Available OpenAI models listing
+  - Available Mistral models listing
   - API key connectivity test
   - Per-user monthly usage summary
 """
@@ -40,7 +40,7 @@ router = APIRouter(prefix="/settings", tags=["settings"])
 # Helpers
 # ──────────────────────────────────────────────────────────────────────
 
-SENSITIVE_KEYS = {"openai_api_key"}
+SENSITIVE_KEYS = {"mistral_api_key"}
 
 
 def _require_admin(user: User) -> None:
@@ -88,7 +88,7 @@ class GlobalSettingsResponse(BaseModel):
     llm_provider: str
     default_model: str
     embed_model: str
-    openai_api_key: str  # masked
+    mistral_api_key: str  # masked
     max_tokens_per_query: str
     rag_top_k: str
     rag_similarity_threshold: str
@@ -100,7 +100,7 @@ class GlobalSettingsUpdate(BaseModel):
     llm_provider: Optional[str] = None
     default_model: Optional[str] = None
     embed_model: Optional[str] = None
-    openai_api_key: Optional[str] = None  # plaintext on input → encrypted at rest
+    mistral_api_key: Optional[str] = None  # plaintext on input → encrypted at rest
     max_tokens_per_query: Optional[str] = None
     rag_top_k: Optional[str] = None
     rag_similarity_threshold: Optional[str] = None
@@ -140,7 +140,7 @@ class ModelInfo(BaseModel):
 
 class TestKeyRequest(BaseModel):
     api_key: str = Field(..., min_length=1)
-    provider: str = "openai"
+    provider: str = "mistral"
 
 
 class TestKeyResponse(BaseModel):
@@ -257,12 +257,11 @@ def update_settings(
 # ──────────────────────────────────────────────────────────────────────
 
 AVAILABLE_MODELS: list[ModelInfo] = [
-    ModelInfo(id="gpt-4o-mini", name="GPT-4o Mini", context_window=128000, input_price=0.15, output_price=0.60),
-    ModelInfo(id="gpt-4o", name="GPT-4o", context_window=128000, input_price=2.50, output_price=10.00),
-    ModelInfo(id="gpt-4-turbo", name="GPT-4 Turbo", context_window=128000, input_price=10.00, output_price=30.00),
-    ModelInfo(id="gpt-3.5-turbo", name="GPT-3.5 Turbo", context_window=16385, input_price=0.50, output_price=1.50),
-    ModelInfo(id="text-embedding-3-small", name="Embedding 3 Small", context_window=8191, input_price=0.02, output_price=0.0),
-    ModelInfo(id="text-embedding-3-large", name="Embedding 3 Large", context_window=8191, input_price=0.13, output_price=0.0),
+    ModelInfo(id="mistral-small-latest", name="Mistral Small", context_window=32000, input_price=0.10, output_price=0.30),
+    ModelInfo(id="mistral-medium-latest", name="Mistral Medium", context_window=32000, input_price=2.70, output_price=8.10),
+    ModelInfo(id="mistral-large-latest", name="Mistral Large", context_window=32000, input_price=2.00, output_price=6.00),
+    ModelInfo(id="open-mistral-nemo", name="Mistral Nemo", context_window=128000, input_price=0.15, output_price=0.15),
+    ModelInfo(id="mistral-embed", name="Mistral Embed", context_window=8192, input_price=0.10, output_price=0.0),
 ]
 
 
@@ -283,16 +282,16 @@ async def test_api_key(
 ):
     _require_admin(user)
 
-    if body.provider != "openai":
+    if body.provider != "mistral":
         raise HTTPException(400, f"Fournisseur non supporté : {body.provider}")
 
     start = time.monotonic()
     try:
-        from openai import AsyncOpenAI
+        from mistralai import Mistral
 
-        client = AsyncOpenAI(api_key=body.api_key)
+        client = Mistral(api_key=body.api_key)
         # Minimal request — list models (cheapest call)
-        await client.models.list()
+        client.models.list()
 
         latency = (time.monotonic() - start) * 1000
         return TestKeyResponse(

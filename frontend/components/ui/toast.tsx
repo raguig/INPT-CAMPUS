@@ -16,7 +16,7 @@ export type ToastItem = {
 
 const toneClasses: Record<ToastTone, string> = {
   danger: "border-red-200 bg-red-50/95 text-red-950",
-  default: "border-slate-200 bg-white/95 text-slate-900",
+  default: "border-gray-200 bg-white/95 text-black",
   success: "border-emerald-200 bg-emerald-50/95 text-emerald-950",
   warning: "border-amber-200 bg-amber-50/95 text-amber-950",
 };
@@ -38,7 +38,7 @@ export function ToastViewport({
         <div
           key={item.id}
           className={cn(
-            "pointer-events-auto rounded-[1.5rem] border px-4 py-4 shadow-[0_18px_40px_rgba(15,23,42,0.16)] backdrop-blur-xl",
+            "pointer-events-auto rounded-[1.5rem] border px-4 py-4 shadow-[0_18px_40px_rgba(4,39,71,0.12)]",
             toneClasses[item.tone ?? "default"],
           )}
         >

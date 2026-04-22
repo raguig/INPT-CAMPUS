@@ -18,11 +18,11 @@ const buttonVariants = cva(
       },
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-[0_12px_30px_rgba(15,118,110,0.22)] hover:-translate-y-0.5 hover:bg-[#0c6760]",
+          "bg-[#042747] text-white shadow-[0_12px_30px_rgba(4,39,71,0.22)] hover:-translate-y-0.5 hover:bg-[#063562]",
         ghost:
-          "bg-transparent text-slate-700 hover:bg-white/70 hover:text-slate-900",
+          "bg-transparent text-gray-700 hover:bg-gray-100 hover:text-black",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-[0_10px_24px_rgba(251,146,60,0.14)] hover:bg-[#ffedd5]",
+          "bg-white text-[#042747] border border-[#042747]/15 shadow-[0_10px_24px_rgba(4,39,71,0.08)] hover:bg-gray-50",
       },
     },
   },

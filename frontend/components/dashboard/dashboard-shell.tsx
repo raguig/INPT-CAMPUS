@@ -1,7 +1,18 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Bot, BookOpen, Loader2, LogOut, Sparkles } from "lucide-react";
+import {
+  Bot,
+  Briefcase,
+  FolderKanban,
+  Loader2,
+  LogOut,
+  Sparkles,
+  UserRound,
+  Users,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -17,18 +28,39 @@ type DashboardShellProps = {
 const highlights = [
   {
     description: "Posez vos questions sur les cours, projets et emplois du temps.",
+    href: "/chat",
     icon: Bot,
-    title: "Assistant académique",
+    title: "Assistant IA",
   },
   {
-    description: "Retrouvez vos informations de filière, cycle et année en un coup d'œil.",
-    icon: BookOpen,
-    title: "Profil étudiant",
+    description: "Organisez et indexez vos documents académiques et administratifs.",
+    href: "/collections",
+    icon: FolderKanban,
+    title: "Collections",
   },
   {
-    description: "Préparez vos révisions et organisez vos objectifs du semestre.",
+    description: "Consultez les offres et suivez vos candidatures stage & PFE.",
+    href: "/internships",
+    icon: Briefcase,
+    title: "Stages & PFE",
+  },
+  {
+    description: "Mettez à jour vos compétences pour améliorer vos correspondances IA.",
+    href: "/profile",
+    icon: UserRound,
+    title: "Mon profil",
+  },
+  {
+    description: "Retrouvez toutes vos candidatures et leur statut en temps réel.",
+    href: "/internships/my-applications",
     icon: Sparkles,
-    title: "Productivité campus",
+    title: "Mes candidatures",
+  },
+  {
+    description: "Rejoignez les clubs, participez aux événements et suivez l'actualité.",
+    href: "/clubs",
+    icon: Users,
+    title: "Clubs",
   },
 ];
 
@@ -59,19 +91,27 @@ export function DashboardShell({ initialUser, token }: DashboardShellProps) {
 
   return (
     <main className="relative flex min-h-screen flex-1 overflow-hidden px-4 py-6 sm:px-6 lg:px-10">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(45,212,191,0.2),transparent_24%),radial-gradient(circle_at_top_right,_rgba(251,146,60,0.18),transparent_26%)]" />
       <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-6">
-        <section className="rounded-[2rem] border border-white/70 bg-white/70 px-6 py-6 shadow-[0_22px_60px_rgba(15,23,42,0.12)] backdrop-blur-xl sm:px-8">
+        <section className="rounded-[2rem] border border-[#042747]/8 bg-white px-6 py-6 shadow-[0_22px_60px_rgba(4,39,71,0.06)] sm:px-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-2xl space-y-3">
-              <div className="inline-flex w-fit rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
-                Campus INPT
+            <div className="flex items-center gap-5">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#042747]/10 bg-white shadow-sm">
+                <Image
+                  src="/image.png"
+                  alt="INPT Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
               </div>
-              <div className="space-y-2">
-                <h1 className="font-serif text-4xl font-semibold tracking-tight text-slate-900">
+              <div className="space-y-1">
+                <div className="inline-flex w-fit rounded-full border border-[#042747]/15 bg-[#042747]/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#042747]">
+                  Campus INPT
+                </div>
+                <h1 className="text-3xl font-bold tracking-tight text-black">
                   Bonjour, {initialUser.full_name}
                 </h1>
-                <p className="max-w-xl text-sm leading-7 text-slate-600 sm:text-base">
+                <p className="max-w-xl text-sm leading-7 text-gray-500">
                   Votre espace est prêt. Explorez les outils IA, vos ressources
                   académiques et les informations utiles pour votre parcours.
                 </p>
@@ -102,70 +142,82 @@ export function DashboardShell({ initialUser, token }: DashboardShellProps) {
 
         <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
           <Card className="overflow-hidden">
-            <CardHeader className="border-b border-slate-100 bg-white/65 pb-5">
-              <CardTitle>Tableau de bord étudiant</CardTitle>
+            <CardHeader className="border-b border-gray-100 bg-white pb-5">
+              <CardTitle>Accès Rapide</CardTitle>
             </CardHeader>
-            <CardContent className="grid gap-4 pt-6 sm:grid-cols-3">
+            <CardContent className="grid gap-4 pt-6 sm:grid-cols-2">
               {highlights.map((item) => {
                 const Icon = item.icon;
 
                 return (
-                  <div
-                    key={item.title}
-                    className="rounded-[1.5rem] border border-slate-100 bg-white/80 p-5 shadow-sm"
-                  >
-                    <div className="mb-4 inline-flex rounded-2xl bg-slate-900 p-3 text-white">
-                      <Icon className="h-5 w-5" />
+                  <Link href={item.href} key={item.title}>
+                    <div className="rounded-[1.5rem] border border-gray-100 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#042747]/20 hover:shadow-md">
+                      <div className="mb-4 inline-flex rounded-2xl bg-[#042747] p-3 text-white">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <h2 className="mb-2 text-lg font-semibold text-black">
+                        {item.title}
+                      </h2>
+                      <p className="text-sm leading-6 text-gray-500">
+                        {item.description}
+                      </p>
                     </div>
-                    <h2 className="mb-2 text-lg font-semibold text-slate-900">
-                      {item.title}
-                    </h2>
-                    <p className="text-sm leading-6 text-slate-600">
-                      {item.description}
-                    </p>
-                  </div>
+                  </Link>
                 );
               })}
             </CardContent>
           </Card>
 
-          <Card className="bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(255,247,237,0.84))]">
+          <Card>
             <CardHeader>
               <CardTitle>Profil Campus</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="rounded-[1.5rem] bg-slate-900 px-5 py-5 text-white shadow-[0_18px_40px_rgba(15,23,42,0.18)]">
-                <p className="text-xs uppercase tracking-[0.24em] text-slate-300">
+              <div className="rounded-[1.5rem] bg-[#042747] px-5 py-5 text-white shadow-[0_18px_40px_rgba(4,39,71,0.18)]">
+                <p className="text-xs uppercase tracking-[0.24em] text-white/60">
                   Compte actif
                 </p>
                 <p className="mt-3 text-2xl font-semibold">{initialUser.email}</p>
               </div>
 
               <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="rounded-[1.5rem] border border-slate-100 bg-white/80 p-4">
-                  <p className="text-slate-500">Apogée</p>
-                  <p className="mt-2 text-base font-semibold text-slate-900">
+                <div className="rounded-[1.5rem] border border-gray-100 bg-white p-4">
+                  <p className="text-gray-500">Apogée</p>
+                  <p className="mt-2 text-base font-semibold text-black">
                     {initialUser.student_id}
                   </p>
                 </div>
-                <div className="rounded-[1.5rem] border border-slate-100 bg-white/80 p-4">
-                  <p className="text-slate-500">Filière</p>
-                  <p className="mt-2 text-base font-semibold text-slate-900">
+                <div className="rounded-[1.5rem] border border-gray-100 bg-white p-4">
+                  <p className="text-gray-500">Filière</p>
+                  <p className="mt-2 text-base font-semibold text-black">
                     {initialUser.filiere}
                   </p>
                 </div>
-                <div className="rounded-[1.5rem] border border-slate-100 bg-white/80 p-4">
-                  <p className="text-slate-500">Cycle</p>
-                  <p className="mt-2 text-base font-semibold capitalize text-slate-900">
+                <div className="rounded-[1.5rem] border border-gray-100 bg-white p-4">
+                  <p className="text-gray-500">Cycle</p>
+                  <p className="mt-2 text-base font-semibold capitalize text-black">
                     {initialUser.cycle}
                   </p>
                 </div>
-                <div className="rounded-[1.5rem] border border-slate-100 bg-white/80 p-4">
-                  <p className="text-slate-500">Année</p>
-                  <p className="mt-2 text-base font-semibold text-slate-900">
+                <div className="rounded-[1.5rem] border border-gray-100 bg-white p-4">
+                  <p className="text-gray-500">Année</p>
+                  <p className="mt-2 text-base font-semibold text-black">
                     {initialUser.year}ème année
                   </p>
                 </div>
+              </div>
+
+              <div className="grid gap-2 sm:grid-cols-2">
+                <Link href="/chat">
+                  <Button className="w-full" type="button" variant="secondary">
+                    Ouvrir l&apos;assistant
+                  </Button>
+                </Link>
+                <Link href="/collections">
+                  <Button className="w-full" type="button" variant="secondary">
+                    Gérer les collections
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>

@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from typing import Generator
 
 from sqlmodel import Session, SQLModel, create_engine, select
@@ -185,7 +186,10 @@ def init_db() -> None:
     # Import all models so SQLModel discovers every table
     from app.models import (  # noqa: F401
         Agent, AgentRun, AgentStep,
-        Application, Connector, Feedback, GeneratedDocument,
+        Application,
+        Club, ClubEvent, ClubMembership, ClubPost, ClubPostLike,
+        Connector, EventRegistration,
+        Feedback, GeneratedDocument,
         GlobalSetting, Internship,
         RefreshTokenBlacklist, StudentProfile, SyncLog,
         UsageLog, User, UserSetting,

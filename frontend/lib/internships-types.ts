@@ -47,7 +47,7 @@ export type ProfileUpdate = {
   avatar_url?: string;
 };
 
-export const FILIERES = ["RST", "SSI", "GL"] as const;
+export const FILIERES = ["ASEDS", "ICCN", "DATA", "SESNUM", "SMART", "AMOA", "CLOUD", "MASTER DATA IA"] as const;
 
 export const REMOTE_OPTIONS = [
   { value: "all", label: "Tous" },
