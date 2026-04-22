@@ -70,6 +70,12 @@ def _retrieve_context(query: str, chroma_names: List[str]) -> str:
         except Exception:
             existing = set()
 
+        from langchain_mistralai import MistralAIEmbeddings
+        import os
+        
+        embed_model = MistralAIEmbeddings(api_key=os.environ.get("MISTRAL_API_KEY", ""))
+        query_embedding = embed_model.embed_query(query)
+
         all_chunks: list[str] = []
         for name in chroma_names:
             if name not in existing:
@@ -82,7 +88,7 @@ def _retrieve_context(query: str, chroma_names: List[str]) -> str:
                     logger.info("Collection '%s' is empty.", name)
                     continue
                 n_results = min(5, count)
-                results = col.query(query_texts=[query], n_results=n_results)
+                results = col.query(query_embeddings=[query_embedding], n_results=n_results)
                 docs = results.get("documents", [[]])[0]
                 all_chunks.extend(docs)
                 logger.info("Got %d chunks from '%s'.", len(docs), name)

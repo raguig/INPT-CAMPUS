@@ -38,7 +38,7 @@ export function ChatInterface({ initialSessionId, initialUser, token }: ChatInte
     initialSessionId,
     onSessionResolved: (resolvedSessionId) => {
       if (!initialSessionId) {
-        router.replace(`/chat/${resolvedSessionId}`);
+        window.history.replaceState(null, "", `/chat/${resolvedSessionId}`);
       }
     },
   });

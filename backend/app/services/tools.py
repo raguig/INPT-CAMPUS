@@ -39,10 +39,15 @@ def rag_search(query: str, collection_ids: Optional[list[str]] = None) -> str:
             # Search all collections — v0.6+ returns names directly
             target_collections = list(client.list_collections())
 
+        from langchain_mistralai import MistralAIEmbeddings
+        import os
+        embed_model = MistralAIEmbeddings(api_key=os.environ.get("MISTRAL_API_KEY", ""))
+        query_embedding = embed_model.embed_query(query)
+
         for coll_name in target_collections:
             try:
                 collection = client.get_collection(coll_name)
-                results = collection.query(query_texts=[query], n_results=5)
+                results = collection.query(query_embeddings=[query_embedding], n_results=5)
                 if results and results.get("documents"):
                     for doc_list in results["documents"]:
                         all_results.extend(doc_list)
@@ -80,9 +85,14 @@ def get_schedule(filiere: str, year: int) -> str:
         except Exception:
             return "Collection 'academic' introuvable. Aucun emploi du temps disponible."
 
+        from langchain_mistralai import MistralAIEmbeddings
+        import os
+        embed_model = MistralAIEmbeddings(api_key=os.environ.get("MISTRAL_API_KEY", ""))
+        
         query_text = f"emploi du temps {filiere} année {year}"
+        query_embedding = embed_model.embed_query(query_text)
         results = collection.query(
-            query_texts=[query_text],
+            query_embeddings=[query_embedding],
             n_results=5,
             where={"type": "schedule"} if collection.count() > 0 else None,
         )
@@ -121,14 +131,19 @@ def get_internships(
         except Exception:
             return "Collection 'internships' introuvable. Aucune offre de stage disponible."
 
+        from langchain_mistralai import MistralAIEmbeddings
+        import os
+        embed_model = MistralAIEmbeddings(api_key=os.environ.get("MISTRAL_API_KEY", ""))
+        
         parts: list[str] = ["stage"]
         if filiere:
             parts.append(filiere)
         if keywords:
             parts.append(keywords)
         query_text = " ".join(parts)
+        query_embedding = embed_model.embed_query(query_text)
 
-        results = collection.query(query_texts=[query_text], n_results=10)
+        results = collection.query(query_embeddings=[query_embedding], n_results=10)
 
         if results and results.get("documents") and results["documents"][0]:
             return "\n\n---\n\n".join(results["documents"][0])
@@ -242,8 +257,13 @@ def get_deadlines() -> str:
             pass  # fall through to static calendar
 
         try:
+            from langchain_mistralai import MistralAIEmbeddings
+            import os
+            embed_model = MistralAIEmbeddings(api_key=os.environ.get("MISTRAL_API_KEY", ""))
+            query_embedding = embed_model.embed_query("dates limites échéances calendrier")
+            
             results = collection.query(
-                query_texts=["dates limites échéances calendrier"],
+                query_embeddings=[query_embedding],
                 n_results=5,
             )
             if results and results.get("documents") and results["documents"][0]:

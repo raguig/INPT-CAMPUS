@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { getApiBaseUrl } from "@/lib/api-config";
 import { useAuthStore } from "@/lib/auth-store";
@@ -104,6 +104,8 @@ export function useChat({ initialSessionId, onSessionResolved }: UseChatOptions)
   const [sessionTitle, setSessionTitle] = useState("Nouvelle conversation");
   const [collections, setCollections] = useState<ChatCollectionOption[]>([]);
   const [currentCollections, setCurrentCollections] = useState<string[]>([]);
+  
+  const isSendingRef = React.useRef(false);
 
   const activeSessionId = useMemo(() => sessionId, [sessionId]);
 
@@ -287,6 +289,8 @@ export function useChat({ initialSessionId, onSessionResolved }: UseChatOptions)
       if (!cleanContent || isLoading) {
         return;
       }
+      
+      isSendingRef.current = true;
 
       const userMessage: ChatMessage = {
         id: crypto.randomUUID(),
@@ -453,6 +457,8 @@ export function useChat({ initialSessionId, onSessionResolved }: UseChatOptions)
           return next;
         });
         setIsLoading(false);
+      } finally {
+        isSendingRef.current = false;
       }
     },
     [
@@ -477,7 +483,7 @@ export function useChat({ initialSessionId, onSessionResolved }: UseChatOptions)
   }, [loadCollections, loadSessions]);
 
   useEffect(() => {
-    if (!sessionId) {
+    if (!sessionId || isSendingRef.current) {
       return;
     }
 

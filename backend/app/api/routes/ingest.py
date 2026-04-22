@@ -8,7 +8,7 @@ from sqlmodel import Session
 
 from app.core.database import get_session
 from app.core.dependencies import get_current_user
-from app.models.document import Collection, Document, DocStatus
+from app.models.document import Collection, Document, DocStatus, DocumentChunk
 from app.models.user import User
 
 logger = logging.getLogger(__name__)
@@ -106,12 +106,34 @@ async def ingest_file(
     session.commit()
     session.refresh(doc)
 
+    # Save chunks to SQLite for UI display
+    for i, chunk_text in enumerate(chunks):
+        db_chunk = DocumentChunk(
+            document_id=doc.id,
+            collection_id=col.id,
+            chroma_id=f"doc_{doc.id}_chunk_{i}",
+            chunk_index=i,
+            text_preview=chunk_text,
+        )
+        session.add(db_chunk)
+    
+    doc.chunk_count = chunk_count
+    session.add(doc)
+    session.commit()
+
     # --- Index into ChromaDB ---
     indexed_chunks = 0
     if chunks:
         try:
             import chromadb
             from app.core.config import DATA_DIR
+            import os
+            from langchain_mistralai import MistralAIEmbeddings
+
+            embed_model = MistralAIEmbeddings(api_key=os.environ.get("MISTRAL_API_KEY", ""))
+            logger.info("Computing embeddings for %d chunks using Mistral...", chunk_count)
+            embeddings = embed_model.embed_documents(chunks)
+
             chroma_dir = DATA_DIR / "chroma"
             chroma_dir.mkdir(parents=True, exist_ok=True)
             client = chromadb.PersistentClient(path=str(chroma_dir.resolve()))
@@ -128,7 +150,7 @@ async def ingest_file(
                 }
                 for i in range(chunk_count)
             ]
-            chroma_col.upsert(documents=chunks, ids=ids, metadatas=metadatas)
+            chroma_col.upsert(documents=chunks, embeddings=embeddings, ids=ids, metadatas=metadatas)
             indexed_chunks = chunk_count
             logger.info("Indexed %d chunks from '%s' into collection '%s'.", chunk_count, filename, col.chroma_collection_name)
         except Exception as exc:

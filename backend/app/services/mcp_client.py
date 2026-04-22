@@ -240,8 +240,14 @@ async def _ingest_file(fetched_file: FetchedFile, connector: Connector) -> None:
             **(fetched_file.metadata or {}),
         }
 
+        from langchain_mistralai import MistralAIEmbeddings
+        import os
+        embed_model = MistralAIEmbeddings(api_key=os.environ.get("MISTRAL_API_KEY", ""))
+        embeddings = embed_model.embed_documents([text])
+
         collection.upsert(
             documents=[text],
+            embeddings=embeddings,
             ids=[doc_id],
             metadatas=[metadata],
         )
