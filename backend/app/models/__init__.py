@@ -9,7 +9,12 @@ from app.models.club import (
 	EventRegistration,
 )
 from app.models.connector import Connector, SyncLog
-from app.models.document import GeneratedDocument
+from app.models.document import (
+    Collection,
+    Document,
+    DocumentChunk,
+    GeneratedDocument,
+)
 from app.models.internship import Application, Internship, StudentProfile
 from app.models.settings import GlobalSetting, UserSetting
 from app.models.user import RefreshTokenBlacklist, User
@@ -19,7 +24,8 @@ __all__ = [
     "Agent", "AgentRun", "AgentStep",
     "Application",
     "Club", "ClubEvent", "ClubMembership", "ClubPost", "ClubPostLike",
-    "Connector",
+    "Collection", "Connector",
+    "Document", "DocumentChunk",
     "EventRegistration",
     "Feedback", "GeneratedDocument",
     "GlobalSetting", "Internship",
