@@ -36,9 +36,8 @@ def rag_search(query: str, collection_ids: Optional[list[str]] = None) -> str:
         target_collections = collection_ids or []
 
         if not target_collections:
-            # Search all collections
-            collections = client.list_collections()
-            target_collections = [c.name for c in collections]
+            # Search all collections — v0.6+ returns names directly
+            target_collections = list(client.list_collections())
 
         for coll_name in target_collections:
             try:
