@@ -66,5 +66,3 @@ A full-stack prototype application for discovering, managing, and interacting wi
 ## Database Initialization
 The backend is configured to automatically create the SQLite database (`campus_inpt.db`) and seed the initial clubs upon startup.
 
-## License
-MIT
